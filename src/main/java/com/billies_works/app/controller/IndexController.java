@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * "index"ビューを返す
  * @author se-ichi
  * まず最初にこれを作る
+ * 変更を加えた
  */
 @Controller
 public class IndexController {
