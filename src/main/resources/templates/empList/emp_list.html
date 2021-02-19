@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>社員一覧</div>
+	<table>
+		<tr>
+		  <th>商品番号</th>
+          <th>商品名</th>
+          <th>価格</th>
+        </tr>
+        <tr th:each="emp : ${empList}">
+          <td th:text="${emp.empno}"></td>
+          <td th:text="${emp.ename}"></td>
+          <td th:text="${emp.job}"></td>
+          <td th:text="${emp.sal}"></td>
+          <td th:text="${emp.age}"></td>
+          <td th:text="${emp.deptno}"></td>
+        </tr>
+	</table>
+</body>
+</html>
+
+<!-- 修正時刻: Fri Feb 19 14:37:08 2021 -->

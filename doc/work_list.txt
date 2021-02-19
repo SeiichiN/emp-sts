@@ -1,0 +1,63 @@
+作業手順
+
+1) controller.IndexController.java を作成
+
+2) templates.index.html を作成
+
+3) SessionController.java を作成
+
+4) templates.session.login.html を作成
+
+5) form.LoginForm.java を作成。
+   このクラスでログインユーザーを表現する。
+    userIdは int、passwordは String
+   
+6) SessionController.java の doLoginメソッドの引数を LoginForm form とする。
+
+7) sessionスコープを使う。
+   LoginFormから getUserId() getPassword() で受け取り、もしOKなら、
+   LoginFormインスタンスをセッションスコープに送る。
+   
+8) application.properties にデータベース接続情報を記述。
+
+9) pom.xml に JPA と JDBC(ojdbc7.jar) の使用を記述。
+   ojdbc7.jar は
+    Oracle Database 12.1.0.2 JDBC Driver & UCP Downloads
+    https://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html?ssSourceSiteId=otnjp
+    からダウンロード。
+   この外部jarは、centralリポジトリにないので、直接ローカルに配置しなくてはならない。
+   
+   ojdbc7.jar は src/main/resources/lib に置いた。
+   
+   その pom.xml の記述は以下。
+   
+	<dependency>
+		<groupId>com.oracle</groupId>
+		<artifactId>ojdbc7</artifactId>
+		<version>12.1.0.2</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/resources/lib/ojdbc7.jar</systemPath>
+	</dependency>
+		
+	また、${basedir} を定義するために、pom.xml の <properties> に以下を追加。
+   
+   <properties>
+        <version>1.8</version>
+   		<basedir>C:\Users\user\git</basedir>     <!-- 追加 -->
+   </properties>
+
+10) エンティティの作成
+
+   アノテーションがいろいろ出てくる。
+   今回は Emp.java という名前で作成。
+   
+11) リポジトリの作成
+   EmpRepository として作成。
+   
+12) コントローラの作成
+   EmpController として作成
+   
+13) ビューの作成
+   
+
+   
