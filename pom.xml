@@ -16,7 +16,8 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<basedir>C:/Users/user/git</basedir>
+		<!-- <basedir>C:/Users/user/git</basedir> -->
+		<basedir>/home/se-ichi/workspace-spring-TokyoIT/emp</basedir>
 	</properties>
 	
 	<dependencies>
@@ -47,7 +48,7 @@
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
-			<version>12.1.0.2</version>
+			<version>11.1.0</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/lib/ojdbc7.jar</systemPath>
 		</dependency>

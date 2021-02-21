@@ -13,10 +13,10 @@ public class EmpController {
 	@Autowired
 	EmpRepository repository;
 	
-	@RequestMapping("/empList/findAll")
+	@RequestMapping("/emps/findAll")
 	public String showEmpList( Model model ) {
-		model.addAttribute("empList", repository.findAll());
-		return ("empList/emp_list");
+		model.addAttribute("emps", repository.findAll());
+		return ("emps/emp_list");
 	}
 	
 	
