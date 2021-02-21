@@ -9,11 +9,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "empList")
+@Table(name = "emp")
 public class Emp {
-	@Id
+	
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_empno_gen")
 	@SequenceGenerator(name = "seq_empno_gen", sequenceName = "seq_empno", allocationSize = 1)
+	@Id
 	private Integer empno;
 	
 	@Column
@@ -30,4 +31,63 @@ public class Emp {
 	
 	@Column
 	private Integer deptno;
+	
+	public Emp() {}
+	
+	public Emp( int empno, String ename, String job, int sal, int age, int deptno ) {
+		this.empno = empno;
+		this.ename = ename;
+		this.job = job;
+		this.sal = sal;
+		this.age = age;
+		this.deptno = deptno;
+	}
+
+	public Integer getEmpno() {
+		return empno;
+	}
+
+	public void setEmpno(Integer empno) {
+		this.empno = empno;
+	}
+
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public Integer getSal() {
+		return sal;
+	}
+
+	public void setSal(Integer sal) {
+		this.sal = sal;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Integer getDeptno() {
+		return deptno;
+	}
+
+	public void setDeptno(Integer deptno) {
+		this.deptno = deptno;
+	}
 }
