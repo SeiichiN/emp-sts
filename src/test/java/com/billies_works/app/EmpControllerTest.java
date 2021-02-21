@@ -29,6 +29,9 @@ class EmpControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	@Autowired
+	private EmpRepository repository;
+	
 	private Emp emp1;
 	
 	@BeforeEach
@@ -41,7 +44,7 @@ class EmpControllerTest {
 	void findAll処理でモデルのメッセージにempsが渡される() throws Exception {
 		this.mockMvc.perform(get("/emps/findAll"))
 			.andExpect(model()
-					.attribute("emps", null));
+					.attribute("emps", repository.findAll()));
 
 	}
 
