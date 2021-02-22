@@ -18,6 +18,12 @@
    LoginFormから getUserId() getPassword() で受け取り、もしOKなら、
    LoginFormインスタンスをセッションスコープに送る。
    
+================ データベース ===============================
+
+まず、サンプル・テーブルを作成する。
+
+jdbcドライバをローカルに設置。
+
 8) application.properties にデータベース接続情報を記述。
 
 9) pom.xml に JPA と JDBC(ojdbc7.jar) の使用を記述。
@@ -43,21 +49,82 @@
    
    <properties>
         <version>1.8</version>
-   		<basedir>C:\Users\user\git</basedir>     <!-- 追加 -->
+   		<basedir>C:/Users/user/git/emp-sts</basedir>     <!-- 追加 -->
    </properties>
 
 10) エンティティの作成
 
    アノテーションがいろいろ出てくる。
-   今回は Emp.java という名前で作成。
+   今回は entity/Emp.java という名前で作成。
+
+   @Entity -- クラスにつけるアノテーション。これでエンティティとなる。
+   @Table(name="emp") -- データベースのテーブルを指定。name指定が無ければ、クラス名がそのままテーブル名として使われる。
+
+   @GeneratedValue の効果がまだ不明。
+
+   @Id -- primary key として設定される。
+   @Column - テーブルの各カラム名と結びつけられる。
+   ゲッター・セッターを作成。特に、ゲッターが無いと、エンティティの各値を取り出せない。
+   
    
 11) リポジトリの作成
    EmpRepository として作成。
+   リポジトリは「倉庫」という意味。
+   通常 エンティティ名Repository.java という名称にするようである。
+   このインターフェースを作成するだけで、DRUD操作が可能となるのは、すごい。
    
+
+ここまでで、データベースを操作するための準備はできている。
+あとは、コントローラを作成して、ユーザーからの要求を受け付ける。
+
 12) コントローラの作成
-   EmpController として作成
+   EmpController として作成。
+   これは、作成したリポジトリの findAll() メソッドを使った処理である。
+
+   クラスに @Controller アノテーションを指定。
+
+   EmpRepository repository に @Autowired を指定。
+   このアノテーションにより、repositoryに適切なクラスをインスタンス化してセットしてくれる。
+
+   @RequestMappingアノテーションで、ユーザーからのURL指定を設定する。
+   そのアノテーションが付与されたメソッドは引数に Model をもつ。
    
+   この場合、Modelというインターフェースで、リクエストスコープに値を保存できる。そのやり方は、model.addAttribute("emps", repository.findAll()) である。
+   これにより、ビューに model が 引き渡される。実際は、"emps" という変数名でその model を取得できる。
+
 13) ビューの作成
+   src/main/resources/templates/emps/emp_list.html を作成。
+
+   ビューでは、${emps} で、リクエストスコープの値を取得できる。
+   今回は、List<Emp> というリストとなっている。
+   
+   (注意) 最初、emp_list.html で <tr th:each="emp: ${emps}"> のところ、
+   emp が null となって、表示されたなかった。
+   これは、entity/Emp.java に、ゲッター・セッターがなかったから。
+
+
+14) 条件検索(主キーによる検索)
+    コントローラにメソッドを追加。
+    今回の場合は、EmpController.java に追加する。
+
+    @RequestMapping("/emps/getOne/{empno}") というアノテーションをつける。
+
+    @RequestMapping("/emps/getOne/{empno}")
+    public String showEmp( @PathVariable int empno, Model model )
+
+    となる。
+
+    ユーザからのURL指定で empno (数字が期待されている) を取得している。
+
+    インスタンスは repository.getOne(empno) で取得できる。
+    それを model.addAttribute("emp", repository.getOne(empno)) でリクエストスコープに保存している。
+    
+
+
+
+
    
 
    
+
+;; 修正時刻: Mon Feb 22 14:00:36 2021

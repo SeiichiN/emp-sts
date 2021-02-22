@@ -39,7 +39,7 @@ class EmpControllerTest {
 		emp1 = new Emp(1001, "河原崎長一郎", "営業", 720, 34, 2);	
 	}
 
-	
+/*	
 	@Test
 	void findAll処理でモデルのメッセージにempsが渡される() throws Exception {
 		this.mockMvc.perform(get("/emps/findAll"))
@@ -47,10 +47,6 @@ class EmpControllerTest {
 					.attribute("emps", repository.findAll()));
 
 	}
-
-	private Object hasProperty(String string, Integer integer) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+*/
 
 }

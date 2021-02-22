@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>社員</div>
+	<table>
+		<tr>
+			<th>社員No</th>
+			<td th:text="${emp.empno}"></td>
+		</tr>
+		<tr>
+			<th>名前</th>
+			<td th:text="${emp.ename}"></td>
+		</tr>
+		<tr>
+			<th>担当</th>
+			<td th:text="${emp.job}"></td>
+		</tr>
+		<tr>
+			<th>給与</th>
+			<td th:text="${emp.sal}"></td>
+		</tr>
+		<tr>
+			<th>年齢</th>
+			<td th:text="${emp.age}"></td>
+		</tr>
+		<tr>
+			<th>所属</th>
+			<td th:text="${emp.deptno}"></td>
+		</tr>
+	</table>
+</body>
+</html>
+
+<!-- 修正時刻: Fri Feb 19 14:37:08 2021 -->
