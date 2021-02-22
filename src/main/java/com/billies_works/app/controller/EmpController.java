@@ -25,4 +25,19 @@ public class EmpController {
 		model.addAttribute("emp", repository.getOne(empno));
 		return "emps/emp";
 	}
+	
+	@RequestMapping("/emps/findBySal/{sal}")
+	public String showEmpListBySal( @PathVariable int sal, Model model ) {
+		model.addAttribute("emps", repository.findBySal(sal));
+		return "emps/emp_list";
+	}
+	
+	@RequestMapping("/emps/findByJobAndAge/{job}/{age}")
+	public String showEmpListByJobAndAge (
+			@PathVariable String job,
+			@PathVariable int age,
+			Model model) {
+		model.addAttribute("emps", repository.findByJobAndAge(job, age));
+		return "emps/emp_list";
+	}
 }

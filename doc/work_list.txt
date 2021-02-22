@@ -104,6 +104,7 @@ jdbcドライバをローカルに設置。
 
 
 14) 条件検索(主キーによる検索)
+
     コントローラにメソッドを追加。
     今回の場合は、EmpController.java に追加する。
 
@@ -118,13 +119,48 @@ jdbcドライバをローカルに設置。
 
     インスタンスは repository.getOne(empno) で取得できる。
     それを model.addAttribute("emp", repository.getOne(empno)) でリクエストスコープに保存している。
+
+
+
+15) 任意のキーによる検索
+
+    今回は、sal(給与)をキーとして検索してみる。
+
+    リポジトリにメソッドを追加。
+    (リポジトリにデフォルトで用意されているメドッソではないから)
     
+    List<Item> findBySal( Integer sal );
+
+    コントローラにメソッドを追加。
+
+    @RequestMapping("/emps/findBySal/{sal}"
+    public String showEmpListBySal( @PathVariable int sal, Model model ) {
+        model.addAttribute("emps", repository.findBySal(sal));
+        return "emps/emp_list";
+    }
+
+    http://localhost:7777/emp/emps/findBySal/720
 
 
+16) 複数の条件による検索
 
+    担当(job) と 年齢(age) で検索してみる。
 
+    リポジトリにメソッドを追加。
+    List<Item> findByJobAndAge( String job, Integer age );
+
+    コントローラにメソッドを追加。
+    @RequestMapping("/items/findByJobAndAge/{job}/{age}")
+    public String showItemListByJobAndAge(
+                @PathVariable String job,
+                @PathVariable int age,
+                Model model ) {
+            model.addAttribute("emps",
+                               repository.findByJobAndAge(job, age));
+            return "emps/emp_list";
+    }
+
+    http://localhost:7777/emp/emps/findByJobAndAge/総務/30
    
 
-   
-
-;; 修正時刻: Mon Feb 22 14:00:36 2021
+;; 修正時刻: Tue Feb 23 08:46:01 2021
