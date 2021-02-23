@@ -70,4 +70,23 @@ public class EmpController {
 		
 		return "redirect:/emps/getOne/" + emp.getEmpno();
 	}
+	
+	@RequestMapping("/emps/update/input/{empno}")
+	public String updateInput(@PathVariable int empno, Model model) {
+		model.addAttribute("emp", repository.getOne(empno));
+		return "emps/update_input";
+	}
+	
+	@RequestMapping(path = "/emps/update/complete/{empno}", method = RequestMethod.POST)
+	public String updateComplete(@PathVariable int empno, EmpForm form) {
+		Emp emp = repository.getOne(empno);
+		emp.setEname(form.getEname());
+		emp.setJob(form.getJob());
+		emp.setSal(form.getSal());
+		emp.setAge(form.getAge());
+		emp.setEmpno(form.getEmpno());
+		repository.save(emp);
+		
+		return "redirect:/emps/getOne/" + emp.getEmpno();
+	}
 }
