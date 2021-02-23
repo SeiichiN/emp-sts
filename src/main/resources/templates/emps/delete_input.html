@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>社員の削除</h2>
+	<form method="post" th:action="@{/emps/delete/complete}">
+		<div>職員番号: <input type="text" name="empno" /></div>
+		<div><input type="submit" value="削除" /></div>
+	</form>
+</body>
+</html>

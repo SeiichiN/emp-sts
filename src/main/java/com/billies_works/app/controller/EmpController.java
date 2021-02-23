@@ -89,4 +89,16 @@ public class EmpController {
 		
 		return "redirect:/emps/getOne/" + emp.getEmpno();
 	}
+	
+	@RequestMapping("/emps/delete/input")
+	public String deleteInput() {
+		return "emps/delete_input";
+	}
+	
+	@RequestMapping(path = "/emps/delete/complete")
+	public String deleteComplete(EmpForm form) {
+		System.out.println(">>>>> delete-no:" + form.getEmpno());
+		repository.deleteById(form.getEmpno());
+		return "redirect:/emps/findAll";
+	}
 }
