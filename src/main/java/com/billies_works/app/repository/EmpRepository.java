@@ -9,4 +9,6 @@ public interface EmpRepository extends JpaRepository<Emp, Integer> {
 	List<Emp> findBySal (Integer sal); 
 	
 	List<Emp> findByJobAndAge (String job, Integer age);
+	
+	List<Emp> findByEnameLike (String ename);
 }

@@ -40,4 +40,12 @@ public class EmpController {
 		model.addAttribute("emps", repository.findByJobAndAge(job, age));
 		return "emps/emp_list";
 	}
+	
+	@RequestMapping("/emps/findByEnameLike/{ename}")
+	public String showEmpListByEnameLike (
+			@PathVariable String ename,
+			Model model) {
+		model.addAttribute("emps", repository.findByEnameLike ("%" + ename + "%"));
+		return "emps/emp_list";
+	}
 }

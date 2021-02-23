@@ -161,6 +161,32 @@ jdbcドライバをローカルに設置。
     }
 
     http://localhost:7777/emp/emps/findByJobAndAge/総務/30
-   
 
-;; 修正時刻: Tue Feb 23 08:46:01 2021
+17) あいまい検索
+
+    名前(ename) を あいまい検索してみる。
+
+    リポジトリにメソッドを追加
+    List<Item> findByEnameLike( String ename );
+
+    コントローラにメソッドを追加
+    @RequestMapping("/items/findByEnameLike/{ename}")
+    public String showItemListByEnameLike( @PathVariable String ename,
+                                           Model model ) {
+        model.addAttribute("emps",
+                           repository.findByEnameLike("%" + ename + "%"));
+        return "emps/emp_list";
+    }
+
+    http://loalhost:7777/emp/emps/findByEnameLike/山
+
+    社員一覧
+    社員No    名前    担当 給与 年齢 所属
+    1003   山田雪子   総務 600  31   1
+    1005   山本太郎   技術 900  36   1
+    1006   山田一太   総務 510  22   1
+    1007   東山由紀子 経理 560  45   1
+
+
+
+;; 修正時刻: Tue Feb 23 13:32:17 2021
