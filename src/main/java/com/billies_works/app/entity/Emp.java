@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Table(name = "emp")
 public class Emp {
 	
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_empno_gen")
-	@SequenceGenerator(name = "seq_empno_gen", sequenceName = "seq_empno", allocationSize = 1)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_empno_gen")
+//	@SequenceGenerator(name = "seq_empno_gen", sequenceName = "seq_empno", allocationSize = 1)
 	@Id
 	private Integer empno;
 	

@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.billies_works.app.entity.Emp;
+import com.billies_works.app.form.EmpForm;
 import com.billies_works.app.repository.EmpRepository;
 
 @Controller
@@ -47,5 +50,24 @@ public class EmpController {
 			Model model) {
 		model.addAttribute("emps", repository.findByEnameLike ("%" + ename + "%"));
 		return "emps/emp_list";
+	}
+	
+	@RequestMapping("/emps/create/input")
+	public String createInput() {
+		return "emps/create_input";
+	}
+	
+	@RequestMapping(path = "/emps/create/complete", method = RequestMethod.POST)
+	public String createComplete(EmpForm form) {
+		Emp emp = new Emp();
+		emp.setEmpno(form.getEmpno());
+		emp.setEname(form.getEname());
+		emp.setJob(form.getJob());
+		emp.setSal(form.getSal());
+		emp.setAge(form.getAge());
+		emp.setDeptno(form.getDeptno());
+		repository.save(emp);
+		
+		return "redirect:/emps/getOne/" + emp.getEmpno();
 	}
 }

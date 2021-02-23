@@ -188,5 +188,38 @@ jdbcドライバをローカルに設置。
     1007   東山由紀子 経理 560  45   1
 
 
+18) 新規登録
 
-;; 修正時刻: Tue Feb 23 13:32:17 2021
+    a) Formクラスを作る
+      Form クラスは、ビューで submitすると、このクラスに値がセットされる。
+
+    b) コントローラを作る
+      まず、/items/create/input というURLを受け取ったら、ビューに渡す処理を作る。
+      それから、ビューから POST で Formクラスのインスタンスを貰ったら、それをItemクラスのインスタンスにセットして、リポジトリに渡す処理を作る。
+
+    c) ビューを作る。
+      id については、自動生成しているので、formは作らない。 --> 失敗
+      もともとのサンプルデータが 1001 から始まっているので、Empクラスの
+      private Integer empno に設定した
+      @GeneratedValue(.....)
+      @SequenceGenerator(.....)
+      がうまく動かない。
+
+      EmpControllerクラスの createCompleteメソッドの中の
+      repository.save(emp); のところで
+          ORA-02289: 順序が存在しません。
+      というエラーが出る。
+
+      (解決策)
+      @GeneratedValue(...) と @SequenceGenerator(...) は諦める。
+      (削除ないしはコメントアウト)
+
+      ビュー(create_input.html) にて、empno も入力することにする。
+
+      これでうまく動く。
+
+      http://localhost:7777/emp/emps/create/input -- フォームを呼び出す。
+      その後、「登録」すると、入力したデータが表示される。
+
+
+;; 修正時刻: Tue Feb 23 17:08:54 2021

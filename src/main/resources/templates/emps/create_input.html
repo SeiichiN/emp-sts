@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>社員の新規登録</h2>
+	<form method="post" th:action="@{/emps/create/complete}">
+		<div>職員番号:<input type="number" name="empno"/></div>
+		<div>名前:<input type="text" name="ename"/></div>
+		<div>仕事:<input type="text" name="job"/></div>
+		<div>給与:<input type="number" name="sal"/></div>
+		<div>年齢:<input type="number" name="age"/></div>
+		<div>所属:<input type="number" name="deptno"/></div>
+		<div><input type="submit" value="登録"/></div>
+	</form>
+</body>
+</html>
